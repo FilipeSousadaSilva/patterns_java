@@ -1,43 +1,57 @@
-abstract class AbstractClass {
- 
-    public void templateMethod() {
-        // common steps that are performed in the same order in all subclasses
-        step1();
-        step2();
-        step3();
-        // call the hook method that can be overridden in subclasses
-        hookMethod();
-    }
- 
-    public void step1() {
-        // implementation of step 1
-    }
- 
-    public void step2() {
-        // implementation of step 2
-    }
- 
-    public void step3() {
-        // implementation of step 3
-    }
- 
-    public void hookMethod() {
-        // default implementation, can be overridden in subclasses
-    }
+abstract class AbstractBeverage {
+  // template method
+  public final void prepareBeverage() {
+    boilWater();
+    brew();
+    pourInCup();
+    addCondiments();
+  }
+
+  public abstract void brew();
+
+  public abstract void addCondiments();
+
+  public void boilWater() {
+    System.out.println("Boiling water...");
+  }
+
+  public void pourInCup() {
+    System.out.println("Pouring in cup...");
+  }
 }
- 
-class ConcreteClassA extends AbstractClass {
- 
-    @Override
-    public void hookMethod() {
-        // implementation specific to ConcreteClassA
-    }
+
+class Tea extends AbstractBeverage {
+  @Override
+  public void brew() {
+    System.out.println("Steeping tea leaves in water...");
+  }
+
+  @Override
+  public void addCondiments() {
+    System.out.println("Adding lemon...");
+  }
 }
- 
-class ConcreteClassB extends AbstractClass {
- 
-    @Override
-    public void hookMethod() {
-        // implementation specific to ConcreteClassB
-    }
+
+class Coffee extends AbstractBeverage {
+  @Override
+  public void brew() {
+    System.out.println("Dripping coffee through filter...");
+  }
+
+  @Override
+  public void addCondiments() {
+    System.out.println("Adding sugar and milk...");
+  }
+}
+
+public class TemplateMethodDemo {
+  public static void main(String[] args) {
+    AbstractBeverage tea = new Tea();
+    tea.prepareBeverage();
+
+    System.out.println("\n");
+
+    AbstractBeverage coffee = new Coffee();
+    coffee.prepareBeverage();
+  }
 }
